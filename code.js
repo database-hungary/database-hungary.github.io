@@ -20,7 +20,7 @@ async function onLoaded() {
             
         this.titles = response.result.sheets.map(x => x.properties.title);
     } catch (error) {
-        this.titles = [ error ];
+        this.titles = [ formatError(error) ];
     }
 
     renderTitles();
@@ -128,8 +128,8 @@ async function loadData(title) {
             title: "",
             subcategory: "",
             data: [{
-                header: "Ошибка",
-                value: error.toString()
+                title: "Ошибка",
+                value: formatError(error)
             }]
         });
     }
@@ -208,6 +208,10 @@ function formatValue(value) {
         return a;
     }
     return document.createTextNode(value);
+}
+
+function formatError(error) {
+    return error.message + error.stack;
 }
 
 function isNullOrWhiteSpace(string) {
