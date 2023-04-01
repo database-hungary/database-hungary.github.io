@@ -1,6 +1,7 @@
 titles = [];
 items = [];
 isLoading = true;
+title = "";
 
 document.addEventListener("DOMContentLoaded", async function() {
     gapi.load("client", onLoaded);
@@ -46,7 +47,7 @@ function renderTitles() {
 }
 
 async function onNavClick(event) {
-    var title = event.currentTarget.children[0].innerText;
+    const title = event.currentTarget.children[0].innerText;
     if (this.isLoading) {
         return;
     }
@@ -76,12 +77,12 @@ async function onNavClick(event) {
     search.value = "";
 }
 
-async function loadData(title) {
+async function loadData(pageTitle) {
     this.items = [];
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: "1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84",
-            range: title + "!A1:Z1000",
+            range: pageTitle + "!A1:Z1000",
         });
         let values = response.result.values;
         let headerRow = values[0];
