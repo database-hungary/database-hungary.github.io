@@ -1,0 +1,30 @@
+html { 
+    overflow-y:scroll; 
+}
+
+a { 
+    white-space: nowrap; 
+}
+
+.itemTitle { 
+    overflow-wrap: break-word; 
+}
+
+.itemSubcategory { 
+    overflow-wrap: break-word; 
+}
+
+.prop { 
+    overflow-wrap: break-word; 
+}
+
+.search { 
+    display: none;
+    width: calc(100% - 24px); 
+    padding: 8px;
+    margin: 12px; 
+}
+
+.item {
+    margin: 8px 0px 8px 0px; 
+}
