@@ -3,6 +3,7 @@ html {
 }
 
 a { 
+    color: #436F4D;
     white-space: nowrap; 
 }
 
@@ -25,9 +26,9 @@ a {
 
 .search { 
     display: none;
-    width: calc(100% - 24px); 
+    width: 100%; 
     padding: 8px;
-    margin: 12px; 
+    margin: 12px 0px 12px 0px; 
 }
 
 .item {
@@ -41,4 +42,9 @@ a {
 
 #about {
     display: none;
+}
+
+.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #ca4242;
 }
