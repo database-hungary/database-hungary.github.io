@@ -28,13 +28,15 @@ async function onLoaded() {
 }
 
 function renderTitles() {
+    const menuItemsList = document.getElementById("menuItemsList");
+    animateOpacityIn(menuItemsList);
+
     for (let i = 0; i < this.titles.length; i++) {
         const title = this.titles[i];
         const li = document.createElement("li");
         li.addEventListener("click", onNavClick);
         const content = document.createTextNode(title);
         const a = document.createElement("a");
-        const menuItemsList = document.getElementById("menuItemsList");
         a.setAttribute("href", "#");
         li.appendChild(a);
         a.appendChild(content);
@@ -52,11 +54,15 @@ async function onNavClick(event) {
         return;
     }
     const menuItemsList = document.getElementById("menuItemsList");
+    const footer = document.getElementById("footer");
     const search = document.getElementById("search");
+    const about = document.getElementById("about");
     
     // Loading
     this.isLoading = true;
-    menuItemsList.style.opacity = 0.5;
+    menuItemsList.style.opacity = 0.75;
+    menuItemsList.style.filter = "grayscale(75%)";
+    about.style.display = "none";
     search.style.display = "none";
     search.value = "";
 
@@ -73,8 +79,11 @@ async function onNavClick(event) {
     // Loaded
     this.isLoading = false;
     menuItemsList.style.opacity = 1;
+    menuItemsList.style.filter = "grayscale(0%)";
+    about.style.display = "inline-block";
     search.style.display = "inline-block";
     search.value = "";
+    animateFooterIn(footer);
 }
 
 async function loadData(pageTitle) {
@@ -139,6 +148,7 @@ async function loadData(pageTitle) {
 
 function renderItems() {
     const infoItemList = document.getElementById("infoItemList");
+    animateOpacityIn(infoItemList);
 
     for (let i = 0; i < this.items.length; i++) {
         const item = this.items[i];
@@ -183,6 +193,26 @@ function renderItems() {
     } else {
         this.listjs = new List("root", options);
     }
+}
+
+function animateOpacityIn(element) {    
+    element.animate([
+        { opacity: 0, },
+        { opacity: 1 }
+      ], {
+        duration: 250,
+        easing: "ease-in-out"
+      });
+}
+
+function animateFooterIn(element) {    
+    element.animate([
+        { transform: "translate(0px, " + element.clientHeight + "px)" },
+        { transform: "translate(0px, 0px)" }
+      ], {
+        duration: 500,
+        easing: "ease-in-out"
+      });
 }
 
 function formatValue(value) {
