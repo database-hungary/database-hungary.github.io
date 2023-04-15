@@ -18,6 +18,11 @@ a {
     overflow-wrap: break-word; 
 }
 
+.footer {
+    background-color: rgb(196 196 196 / 0.3);
+    backdrop-filter: blur(10px);
+}
+
 .search { 
     display: none;
     width: calc(100% - 24px); 
@@ -27,4 +32,13 @@ a {
 
 .item {
     margin: 8px 0px 8px 0px; 
+}
+
+#menuItemsList {
+    opacity: 0.75;
+    filter: grayscale(75%);
+}
+
+#about {
+    display: none;
 }
