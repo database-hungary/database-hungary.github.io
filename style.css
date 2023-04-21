@@ -22,6 +22,7 @@ a {
 .footer {
     background-color: rgb(196 196 196 / 0.3);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .search { 
@@ -45,6 +46,7 @@ a {
 
 #about {
     display: none;
+    margin-bottom: calc(env(safe-area-inset-bottom) + 96px);
 }
 
 .nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
