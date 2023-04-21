@@ -1,54 +1,52 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <title>Database Hungary</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="style.css" rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-        <script src="https://apis.google.com/js/api.js"></script>
-    </head>
-    <body>
-    <div class="root" id="root"><br/>
+html { 
+    overflow-y:scroll; 
+}
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container">
-                <ul id="menuItemsList" class="nav nav-pills">
-                </ul>
-            </div>
-        </div>
-    </div>
+a { 
+    color: #436F4D;
+    white-space: nowrap; 
+}
 
-    <div class="container">
-        <ul id="infoItemList" class="list list-group">
-        </ul>
-        <p id="about">
-            Основано на данных 
-            <a href="https://docs.google.com/spreadsheets/u/0/d/1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84">Google Таблицы</a>
-            из телеграм чата
-            <a href="https://t.me/chattripandme">Чат Венгрия, Будапешт и ТОЛЬКО</a>.<br/>
-            Разработал
-            <a href="https://t.me/cherepets">cherepets</a>
-        </p>
-        <br/><br/><br/><br/><br/><br/>
-    </div>
+.itemTitle { 
+    overflow-wrap: break-word; 
+}
 
-    <footer id="footer" class="footer navbar-fixed-bottom">
-        <div class="container">
-            <form class="form-search">
-                <input id="search" class="search search-query" placeholder="Поиск"/>
-            </form>
-        </div>
-    </footer>
+.itemSubcategory { 
+    overflow-wrap: break-word; 
+}
 
-    </div>
-        <script src="code.js"></script>
-    </body>
-</html>
+.prop { 
+    overflow-wrap: break-word; 
+}
+
+.footer {
+    background-color: rgb(196 196 196 / 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.search { 
+    display: none;
+    width: 100%; 
+    padding: 8px;
+    margin-top: 12px; 
+    margin-bottom: max(12px, constant(env(safe-area-inset-bottom)));
+    margin-bottom: max(12px, calc(env(safe-area-inset-bottom)));
+}
+
+.item {
+    margin: 8px 0px 8px 0px; 
+}
+
+#menuItemsList {
+    opacity: 0.75;
+    filter: grayscale(75%);
+}
+
+#about {
+    display: none;
+}
+
+.nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #ca4242;
+}
