@@ -28,9 +28,12 @@ a {
     display: none;
     width: 100%; 
     padding: 8px;
-    margin-top: 12px; 
-    margin-bottom: max(12px, constant(env(safe-area-inset-bottom)));
-    margin-bottom: max(12px, calc(env(safe-area-inset-bottom)));
+    margin: 12px 0px;
+}
+@media (orientation: portrait) {
+    .search {
+        margin: 20px 8px; /* adjust as needed */
+    }
 }
 
 .item {
