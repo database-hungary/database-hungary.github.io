@@ -33,7 +33,8 @@ a {
 }
 @media (orientation: portrait) {
     .search {
-        margin: 24px 16px; /* adjust as needed */
+        width: calc(100% - 32px);
+        margin: 24px 16px;
     }
 }
 
