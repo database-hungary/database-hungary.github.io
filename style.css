@@ -26,12 +26,9 @@ a {
 
 .search { 
     display: none;
-    width: 100%; 
+    width: calc(100% - 16px); 
     padding: 8px;
-    margin-top: calc(12px + env(safe-area-inset-bottom));
-    margin-bottom: calc(12px + env(safe-area-inset-bottom));
-    margin-left: env(safe-area-inset-left);
-    margin-right: env(safe-area-inset-right);
+    margin: 22px 8px; 
 }
 
 .item {
