@@ -22,18 +22,15 @@ a {
 .footer {
     background-color: rgb(196 196 196 / 0.3);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 .search { 
     display: none;
-    width: calc(100% - 16px); 
+    width: 100%; 
     padding: 8px;
-    margin-left: 8px; 
-    margin-right: 22px 8px; 
-    margin-top: 22px; 
-    margin-bottom: max(22px, calc(constant(safe-area-inset-bottom) + 16px));
-    margin-bottom: max(22px, calc(env(safe-area-inset-bottom) + 16px));
+    margin-top: 12px; 
+    margin-bottom: max(12px, constant(env(safe-area-inset-bottom)));
+    margin-bottom: max(12px, calc(env(safe-area-inset-bottom)));
 }
 
 .item {
