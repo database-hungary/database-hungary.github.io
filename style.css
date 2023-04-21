@@ -20,7 +20,8 @@ a {
 }
 
 .footer {
-    background-color: rgb(196 196 196 / 0.3);
+    background-color: rgb(196 196 196 / 0.3); 
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
