@@ -32,7 +32,7 @@ a {
 }
 @media (orientation: portrait) {
     .search {
-        margin: 20px 8px; /* adjust as needed */
+        margin: 24px 16px; /* adjust as needed */
     }
 }
 
