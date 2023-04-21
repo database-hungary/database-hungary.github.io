@@ -32,7 +32,12 @@ a {
     margin-left: 8px; 
     margin-right: 22px 8px; 
     margin-top: 22px; 
-    margin-bottom: max(22px, calc(env(safe-area-inset-bottom) + 16px)); 
+    margin-bottom: max(22px, 
+        calc(
+            max(
+                env(safe-area-inset-bottom), 
+                constant(safe-area-inset-bottom)
+            ) + 16px)); 
 }
 
 .item {
@@ -46,7 +51,6 @@ a {
 
 #about {
     display: none;
-    margin-bottom: calc(env(safe-area-inset-bottom) + 96px);
 }
 
 .nav-pills>li.active>a,.nav-pills>li.active>a:hover,.nav-pills>li.active>a:focus {
