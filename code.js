@@ -213,6 +213,12 @@ function animateFooterIn(element) {
         duration: 500,
         easing: "ease-in-out"
       });
+      // iOS bug: https://stackoverflow.com/a/66103417/1876990
+      setTimeout(500, () => {
+        element.style.display = "table";
+        element.offsetHeight;
+        element.style.display = "block";
+      });
 }
 
 function formatValue(value) {
