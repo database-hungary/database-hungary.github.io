@@ -32,7 +32,7 @@ a {
     margin-left: 8px; 
     margin-right: 22px 8px; 
     margin-top: 22px; 
-    margin-bottom: max(22px, constant(env(safe-area-inset-bottom) + 16px));
+    margin-bottom: max(22px, calc(constant(safe-area-inset-bottom) + 16px));
     margin-bottom: max(22px, calc(env(safe-area-inset-bottom) + 16px));
 }
 
