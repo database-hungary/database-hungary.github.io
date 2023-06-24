@@ -4,11 +4,11 @@
         <title>Database Hungary</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="style.css" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
+        <script src="theme.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
@@ -43,7 +43,7 @@
     <footer id="footer" class="footer navbar-fixed-bottom">
         <div class="container">
             <form class="form-search">
-                <input id="search" class="search search-query" placeholder="Поиск"/>
+                <input id="search" class="search search-query" placeholder="Поиск" onkeydown="if(event.keyCode==13) event.preventDefault();" />
             </form>
         </div>
     </footer>

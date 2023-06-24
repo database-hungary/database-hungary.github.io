@@ -1,11 +1,34 @@
+isFirstTime = true;
+
 titles = [];
 items = [];
-isLoading = true;
+isLoading = false;
 title = "";
+search = "";
 
 document.addEventListener("DOMContentLoaded", async function() {
-    gapi.load("client", onLoaded);
-});
+    const search = document.getElementById("search");
+    search.addEventListener("input", function(event) {
+        this.search = event.target.value;
+        updateUrl();
+    }.bind(window));
+
+    const params = new URLSearchParams(window.location.search);
+    if (params) {
+        const titleParam = params.get("page");
+        if (titleParam) {
+            this.title = titleParam;
+        }
+
+        const searchParam = params.get("search");
+        if (searchParam) {
+            this.search = searchParam;
+            console.log(this.search);
+        }
+    }
+
+    gapi.load("client", onLoaded.bind(window));
+}.bind(window));
 
 async function onLoaded() {
     await gapi.client.init({
@@ -19,7 +42,7 @@ async function onLoaded() {
             fields: "sheets(properties(title))",
         });
             
-        this.titles = response.result.sheets.map(x => x.properties.title);
+        this.titles = response.result.sheets.map(x => x.properties.title).slice(1);
     } catch (error) {
         this.titles = [ formatError(error) ];
     }
@@ -31,10 +54,11 @@ function renderTitles() {
     const menuItemsList = document.getElementById("menuItemsList");
     animateOpacityIn(menuItemsList);
 
+    const hasRequestedPage = !isNullOrWhiteSpace(this.title) && this.titles.includes(this.title);
     for (let i = 0; i < this.titles.length; i++) {
         const title = this.titles[i];
         const li = document.createElement("li");
-        li.addEventListener("click", onNavClick);
+        li.addEventListener("click", onNavClick.bind(window));
         const content = document.createTextNode(title);
         const a = document.createElement("a");
         a.setAttribute("href", "#");
@@ -42,14 +66,17 @@ function renderTitles() {
         a.appendChild(content);
         menuItemsList.appendChild(li);
         
-        if (i == 0) {
+        const isFirst = !hasRequestedPage && i == 0;
+        const isRequested = hasRequestedPage && this.title == title;
+
+        if (isFirst || isRequested) {
             li.click();
         }
     }
 }
 
 async function onNavClick(event) {
-    const title = event.currentTarget.children[0].innerText;
+    this.title = event.currentTarget.children[0].innerText;
     if (this.isLoading) {
         return;
     }
@@ -64,7 +91,8 @@ async function onNavClick(event) {
     menuItemsList.style.filter = "grayscale(75%)";
     about.style.display = "none";
     search.style.display = "none";
-    search.value = "";
+    
+    updateUrl();
 
     var actives = document.getElementsByClassName("active");
     for (let i = 0; i < actives.length; i++) {
@@ -74,7 +102,7 @@ async function onNavClick(event) {
     event.currentTarget.setAttribute("class", "active");
     const infoItemList = document.getElementById("infoItemList");
     infoItemList.innerHTML = "";
-    await loadData(title);
+    await loadData();
     
     // Loaded
     this.isLoading = false;
@@ -82,16 +110,23 @@ async function onNavClick(event) {
     menuItemsList.style.filter = "grayscale(0%)";
     about.style.display = "inline-block";
     search.style.display = "inline-block";
-    search.value = "";
+    if (this.isFirstTime) {
+        search.value = this.search;
+        this.listjs.search(search.value);
+    } else {
+        search.value = "";
+    }
     animateFooterIn(footer);
+
+    this.isFirstTime = false;
 }
 
-async function loadData(pageTitle) {
+async function loadData() {
     this.items = [];
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: "1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84",
-            range: pageTitle + "!A1:Z1000",
+            range: this.title + "!A1:Z1000",
         });
         let values = response.result.values;
         let headerRow = values[0];
@@ -249,6 +284,14 @@ function formatValue(value) {
 
 function formatError(error) {
     return error.message + error.stack;
+}
+
+function updateUrl() {
+    let url = `?page=${this.title}`;
+    if (!isNullOrWhiteSpace(this.search)) {
+        url += `&search=${this.search}`;
+    }
+    history.pushState(null, null, url);
 }
 
 function isNullOrWhiteSpace(string) {
