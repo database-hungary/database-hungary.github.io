@@ -11,6 +11,9 @@ a {
     color: #006e3c;
     white-space: nowrap; 
 }
+a:hover { 
+    color: #78c78b;
+}
 
 h2 {
     color: #000;
