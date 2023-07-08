@@ -129,7 +129,17 @@ async function loadData() {
             range: this.title + "!A1:Z1000",
         });
         let values = response.result.values;
-        let headerRow = values[0];
+        const headerSearchLimit = 4;
+        const headerMinimumLength= 4;
+        
+        let headerRow = new Array();
+        for (var attempt = 0; attempt < headerSearchLimit; attempt++) {
+            if (headerRow.length < 4) {
+                values.shift();
+                headerRow = values[0];
+            } else break;
+        }
+        
         if (headerRow.length < 4) {
             console.log("Header is too short");
         } else {
@@ -244,8 +254,7 @@ function animateFooterIn(element) {
     element.animate([
         { transform: "translate(0px, " + element.clientHeight + "px)" },
         { transform: "translate(0px, 0px)" }
-      ], {
-        duration: 500,
+      ], {duration: 500,
         easing: "ease-in-out"
       });
       // iOS bug: https://stackoverflow.com/a/66103417/1876990
@@ -287,13 +296,13 @@ function formatError(error) {
 }
 
 function updateUrl() {
-    let url = `?page=${this.title}`;
+    let url = ?page=${this.title};
     if (!isNullOrWhiteSpace(this.search)) {
-        url += `&search=${this.search}`;
+        url += &search=${this.search};
     }
     history.pushState(null, null, url);
 }
 
 function isNullOrWhiteSpace(string) {
-    return !string || string == "" || string == " ";
+    return !string  string == ""  string == " ";
 }
