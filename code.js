@@ -254,7 +254,8 @@ function animateFooterIn(element) {
     element.animate([
         { transform: "translate(0px, " + element.clientHeight + "px)" },
         { transform: "translate(0px, 0px)" }
-      ], {duration: 500,
+      ], {
+        duration: 500,
         easing: "ease-in-out"
       });
       // iOS bug: https://stackoverflow.com/a/66103417/1876990
@@ -296,13 +297,13 @@ function formatError(error) {
 }
 
 function updateUrl() {
-    let url = ?page=${this.title};
+    let url = `?page=${this.title}`;
     if (!isNullOrWhiteSpace(this.search)) {
-        url += &search=${this.search};
+        url += `&search=${this.search}`;
     }
     history.pushState(null, null, url);
 }
 
 function isNullOrWhiteSpace(string) {
-    return !string  string == ""  string == " ";
+    return !string || string == "" || string == " ";
 }
