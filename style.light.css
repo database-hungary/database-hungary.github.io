@@ -8,10 +8,18 @@ body {
 }
 
 a { 
-    color: #006e3c;
     white-space: nowrap; 
 }
-a:hover { 
+a:link {
+    color: #006e3c;
+}
+a:visited {
+    color: #006e3c;
+}
+a:hover {
+    color: #585;
+}
+a:active {
     color: #78c78b;
 }
 
