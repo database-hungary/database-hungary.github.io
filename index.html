@@ -15,40 +15,40 @@
         <script src="https://apis.google.com/js/api.js"></script>
     </head>
     <body>
-    <div class="root" id="root"><br/>
+        <div class="root" id="root"><br/>
 
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container">
-                <ul id="menuItemsList" class="nav nav-pills">
-                </ul>
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <ul id="menuItemsList" class="nav nav-pills">
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <ul id="infoItemList" class="list list-group">
-        </ul>
-        <p id="about">
-            Основано на данных 
-            <a href="https://docs.google.com/spreadsheets/u/0/d/1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84">Google Таблицы</a>
-            из телеграм чата
-            <a href="https://t.me/chattripandme">Чат Венгрия, Будапешт и ТОЛЬКО</a>.<br/>
-            Разработал
-            <a href="https://t.me/cherepets">cherepets</a>
-        </p>
-        <br/><br/><br/><br/><br/><br/>
-    </div>
-
-    <footer id="footer" class="footer navbar-fixed-bottom">
         <div class="container">
-            <form class="form-search">
-                <input id="search" class="search search-query" placeholder="Поиск" onkeydown="if(event.keyCode==13) event.preventDefault();" />
-            </form>
+            <ul id="infoItemList" class="list list-group">
+            </ul>
+            <p id="about" style="display: none;">
+                Основано на данных 
+                <a href="https://docs.google.com/spreadsheets/u/0/d/1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84">Google Таблицы</a>
+                из телеграм чата
+                <a href="https://t.me/chattripandme">Чат Венгрия, Будапешт и ТОЛЬКО</a>.<br/>
+                Разработал
+                <a href="https://t.me/cherepets">cherepets</a>
+            </p>
+            <br/><br/><br/><br/><br/><br/>
         </div>
-    </footer>
 
-    </div>
+        <footer id="footer" class="footer navbar-fixed-bottom">
+            <div class="container">
+                <form class="form-search">
+                    <input id="search" class="search search-query" placeholder="Поиск" onkeydown="if(event.keyCode==13) event.preventDefault();" />
+                </form>
+            </div>
+        </footer>
+
+        </div>
         <script src="code.js"></script>
     </body>
 </html>

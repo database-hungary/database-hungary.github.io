@@ -73,6 +73,8 @@ function renderTitles() {
             li.click();
         }
     }
+    
+    animateSlideIn(menuItemsList, true);
 }
 
 async function onNavClick(event) {
@@ -116,7 +118,7 @@ async function onNavClick(event) {
     } else {
         search.value = "";
     }
-    animateFooterIn(footer);
+    animateSlideIn(footer, false);
 
     this.isFirstTime = false;
 }
@@ -240,7 +242,7 @@ function renderItems() {
     }
 }
 
-function animateOpacityIn(element) {    
+function animateOpacityIn(element) {
     element.animate([
         { opacity: 0, },
         { opacity: 1 }
@@ -250,16 +252,20 @@ function animateOpacityIn(element) {
       });
 }
 
-function animateFooterIn(element) {    
+function animateSlideIn(element, direction) {    
+    let from = element.clientHeight;
+    if (direction) {
+        from *= -1;
+    }
     element.animate([
-        { transform: "translate(0px, " + element.clientHeight + "px)" },
+        { transform: "translate(0px, " + from + "px)" },
         { transform: "translate(0px, 0px)" }
       ], {
-        duration: 500,
+        duration: 250,
         easing: "ease-in-out"
       });
       // iOS bug: https://stackoverflow.com/a/66103417/1876990
-      setTimeout(500, () => {
+      setTimeout(250, () => {
         element.style.display = "table";
         element.offsetHeight;
         element.style.display = "block";
