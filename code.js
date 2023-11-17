@@ -1,3 +1,4 @@
+spreadsheetId = "1Ap8RnCL-HDkcXE8BFlB6s7EBrVK1fQwqGoJHbgEFXnM";
 isFirstTime = true;
 
 titles = [];
@@ -38,7 +39,7 @@ async function onLoaded() {
 
     try {
         let response = await gapi.client.sheets.spreadsheets.get({
-            spreadsheetId: "1Ap8RnCL-HDkcXE8BFlB6s7EBrVK1fQwqGoJHbgEFXnM",
+            spreadsheetId: this.spreadsheetId,
             fields: "sheets(properties(title))",
         });
             
@@ -127,7 +128,7 @@ async function loadData() {
     this.items = [];
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: "1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84",
+            spreadsheetId: this.spreadsheetId,
             range: this.title + "!A1:Z1000",
         });
         let values = response.result.values;
