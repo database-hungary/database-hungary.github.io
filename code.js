@@ -300,7 +300,11 @@ function formatValue(value) {
 }
 
 function formatError(error) {
-    return error.message + error.stack;
+    let output = "";
+    if (error.body && error.result) error = error.result.error;
+    if (error.message) output += error.message + "\r\n";
+    if (error.stack) output += error.stack + "\r\n";
+    return output;
 }
 
 function updateUrl() {
