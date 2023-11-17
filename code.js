@@ -42,7 +42,7 @@ async function onLoaded() {
             fields: "sheets(properties(title))",
         });
             
-        this.titles = response.result.sheets.map(x => x.properties.title).slice(1);
+        this.titles = response.result.sheets.map(x => x.properties.title).slice(2);
     } catch (error) {
         this.titles = [ formatError(error) ];
     }
