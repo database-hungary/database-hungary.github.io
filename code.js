@@ -273,6 +273,7 @@ function animateSlideIn(element, direction) {
 }
 
 function formatValue(value) {
+    value = value.toString();
     function short(value) {
         if (value.length > 40) {
             value = value.substring(0, 37) + "...";
