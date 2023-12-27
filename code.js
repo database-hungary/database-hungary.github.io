@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     gapi.load("client", onLoaded.bind(window));
+
+    const googleLink = document.getElementById("googleLink");
+    googleLink.href = "https://docs.google.com/spreadsheets/d/" + spreadsheetId;
 }.bind(window));
 
 async function onLoaded() {
