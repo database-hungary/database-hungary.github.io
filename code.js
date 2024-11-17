@@ -38,7 +38,7 @@ async function onLoaded() {
 
     try {
         let response = await gapi.client.sheets.spreadsheets.get({
-            spreadsheetId: "1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84",
+            spreadsheetId: "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI",
             fields: "sheets(properties(title))",
         });
             
@@ -127,7 +127,7 @@ async function loadData() {
     this.items = [];
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: "1BvIXzfxdg28vinrQ8PfpxfLyuaP6LGA1nETN14AMq84",
+            spreadsheetId: "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI",
             range: this.title + "!A1:Z1000",
         });
         let values = response.result.values;
