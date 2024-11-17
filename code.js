@@ -54,7 +54,7 @@ function renderTitles() {
     const menuItemsList = document.getElementById("menuItemsList");
     animateOpacityIn(menuItemsList);
 
-    const hasRequestedPage = !isNullOrWhiteSpace(this.title) && this.titles.includes(this.title);
+    const hasRequestedPage = !isEmptyString(this.title) && this.titles.includes(this.title);
     for (let i = 0; i < this.titles.length; i++) {
         const title = this.titles[i];
         const li = document.createElement("li");
@@ -78,7 +78,7 @@ function renderTitles() {
 }
 
 async function onNavClick(event) {
-    this.title = event.currentTarget.children[0].innerText;
+    this.title = event.currentTarget.children[0].innerHTML;
     if (this.isLoading) {
         return;
     }
@@ -134,9 +134,9 @@ async function loadData() {
         const headerSearchLimit = 4;
         const headerMinimumLength= 4;
         
-        let headerRow = new Array();
+        let headerRow = values[0];
         for (var attempt = 0; attempt < headerSearchLimit; attempt++) {
-            if (headerRow.length < 4) {
+            if (headerRow.length < headerMinimumLength) {
                 values.shift();
                 headerRow = values[0];
             } else break;
@@ -152,7 +152,7 @@ async function loadData() {
                 } else {
                     var subcategory = row[2];
                     var title = row[3];
-                    if (isNullOrWhiteSpace(title)) {            
+                    if (isEmptyString(title)) {            
                         title = subcategory;
                         subcategory = "";
                     }
@@ -160,7 +160,7 @@ async function loadData() {
                     for (var x = 4; x < headerRow.length; x++)
                     {
                         const header = headerRow[x];
-                        if (x < row.length && !isNullOrWhiteSpace(row[x]))
+                        if (x < row.length && !isEmptyString(row[x]))
                         {
                             const value = row[x];
                             const dataItem = {
@@ -304,12 +304,12 @@ function formatError(error) {
 
 function updateUrl() {
     let url = `?page=${this.title}`;
-    if (!isNullOrWhiteSpace(this.search)) {
+    if (!isEmptyString(this.search)) {
         url += `&search=${this.search}`;
     }
     history.pushState(null, null, url);
 }
 
-function isNullOrWhiteSpace(string) {
-    return !string || string == "" || string == " ";
+function isEmptyString(string) {
+    return !string || string == "" || string == " " || string == ".";
 }
