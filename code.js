@@ -1,4 +1,3 @@
-spreadsheetId = "1Ap8RnCL-HDkcXE8BFlB6s7EBrVK1fQwqGoJHbgEFXnM";
 isFirstTime = true;
 
 titles = [];
@@ -29,9 +28,6 @@ document.addEventListener("DOMContentLoaded", async function() {
     }
 
     gapi.load("client", onLoaded.bind(window));
-
-    const googleLink = document.getElementById("googleLink");
-    googleLink.href = "https://docs.google.com/spreadsheets/d/" + spreadsheetId;
 }.bind(window));
 
 async function onLoaded() {
@@ -42,11 +38,11 @@ async function onLoaded() {
 
     try {
         let response = await gapi.client.sheets.spreadsheets.get({
-            spreadsheetId: this.spreadsheetId,
+            spreadsheetId: "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI",
             fields: "sheets(properties(title))",
         });
             
-        this.titles = response.result.sheets.map(x => x.properties.title).slice(2);
+        this.titles = response.result.sheets.map(x => x.properties.title).slice(1);
     } catch (error) {
         this.titles = [ formatError(error) ];
     }
@@ -131,7 +127,7 @@ async function loadData() {
     this.items = [];
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: this.spreadsheetId,
+            spreadsheetId: "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI",
             range: this.title + "!A1:Z1000",
         });
         let values = response.result.values;
@@ -277,7 +273,6 @@ function animateSlideIn(element, direction) {
 }
 
 function formatValue(value) {
-    value = value.toString();
     function short(value) {
         if (value.length > 40) {
             value = value.substring(0, 37) + "...";
@@ -304,11 +299,7 @@ function formatValue(value) {
 }
 
 function formatError(error) {
-    let output = "";
-    if (error.body && error.result) error = error.result.error;
-    if (error.message) output += error.message + "\r\n";
-    if (error.stack) output += error.stack + "\r\n";
-    return output;
+    return error.message + error.stack;
 }
 
 function updateUrl() {
