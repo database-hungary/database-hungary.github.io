@@ -204,8 +204,7 @@ function renderItems() {
         // Title
         const h2 = document.createElement("h2");
         h2.setAttribute("class", "itemTitle");
-        const titleContent = document.createTextNode(item.title);
-        h2.appendChild(titleContent);
+        h2.appendChild(formatValue(item.title));
         li.appendChild(h2);
         // Subcategory
         const h4 = document.createElement("h4");
