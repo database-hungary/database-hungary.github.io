@@ -1,3 +1,5 @@
+spreadsheetId = "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI";
+
 isFirstTime = true;
 
 titles = [];
@@ -38,7 +40,7 @@ async function onLoaded() {
 
     try {
         let response = await gapi.client.sheets.spreadsheets.get({
-            spreadsheetId: "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI",
+            spreadsheetId: this.spreadsheetId,
             fields: "sheets(properties(title))",
         });
             
@@ -54,7 +56,7 @@ function renderTitles() {
     const menuItemsList = document.getElementById("menuItemsList");
     animateOpacityIn(menuItemsList);
 
-    const hasRequestedPage = !isNullOrWhiteSpace(this.title) && this.titles.includes(this.title);
+    const hasRequestedPage = !isEmptyString(this.title) && this.titles.includes(this.title);
     for (let i = 0; i < this.titles.length; i++) {
         const title = this.titles[i];
         const li = document.createElement("li");
@@ -78,10 +80,11 @@ function renderTitles() {
 }
 
 async function onNavClick(event) {
-    this.title = event.currentTarget.children[0].innerText;
+    this.title = event.currentTarget.children[0].innerHTML;
     if (this.isLoading) {
         return;
     }
+    const googleSheetLink = document.getElementById("googleSheetLink");
     const menuItemsList = document.getElementById("menuItemsList");
     const footer = document.getElementById("footer");
     const search = document.getElementById("search");
@@ -108,6 +111,8 @@ async function onNavClick(event) {
     
     // Loaded
     this.isLoading = false;
+
+    googleSheetLink.setAttribute("href", "https://docs.google.com/spreadsheets/d/" + this.spreadsheetId);
     menuItemsList.style.opacity = 1;
     menuItemsList.style.filter = "grayscale(0%)";
     about.style.display = "inline-block";
@@ -127,16 +132,16 @@ async function loadData() {
     this.items = [];
     try {
         let response = await gapi.client.sheets.spreadsheets.values.get({
-            spreadsheetId: "1GKqXNaVu-Lc3oeRZkBMbP21AlH0o5r8XzmyJmx5C9QI",
+            spreadsheetId: this.spreadsheetId,
             range: this.title + "!A1:Z1000",
         });
         let values = response.result.values;
         const headerSearchLimit = 4;
         const headerMinimumLength= 4;
         
-        let headerRow = new Array();
+        let headerRow = values[0];
         for (var attempt = 0; attempt < headerSearchLimit; attempt++) {
-            if (headerRow.length < 4) {
+            if (headerRow.length < headerMinimumLength) {
                 values.shift();
                 headerRow = values[0];
             } else break;
@@ -152,7 +157,7 @@ async function loadData() {
                 } else {
                     var subcategory = row[2];
                     var title = row[3];
-                    if (isNullOrWhiteSpace(title)) {            
+                    if (isEmptyString(title)) {            
                         title = subcategory;
                         subcategory = "";
                     }
@@ -160,7 +165,7 @@ async function loadData() {
                     for (var x = 4; x < headerRow.length; x++)
                     {
                         const header = headerRow[x];
-                        if (x < row.length && !isNullOrWhiteSpace(row[x]))
+                        if (x < row.length && !isEmptyString(row[x]))
                         {
                             const value = row[x];
                             const dataItem = {
@@ -204,8 +209,7 @@ function renderItems() {
         // Title
         const h2 = document.createElement("h2");
         h2.setAttribute("class", "itemTitle");
-        const titleContent = document.createTextNode(item.title);
-        h2.appendChild(titleContent);
+        h2.appendChild(formatValue(item.title));
         li.appendChild(h2);
         // Subcategory
         const h4 = document.createElement("h4");
@@ -289,7 +293,7 @@ function formatValue(value) {
     }
     if (value.startsWith("+3")) {
         const a = document.createElement("a");
-        a.setAttribute("href", "tel:"+value);
+        a.setAttribute("href", "tel:" + value);
         a.setAttribute("class", "link")
         const content = document.createTextNode(short(value));
         a.appendChild(content);
@@ -304,12 +308,12 @@ function formatError(error) {
 
 function updateUrl() {
     let url = `?page=${this.title}`;
-    if (!isNullOrWhiteSpace(this.search)) {
+    if (!isEmptyString(this.search)) {
         url += `&search=${this.search}`;
     }
     history.pushState(null, null, url);
 }
 
-function isNullOrWhiteSpace(string) {
-    return !string || string == "" || string == " ";
+function isEmptyString(string) {
+    return !string || string == "" || string == " " || string == ".";
 }
